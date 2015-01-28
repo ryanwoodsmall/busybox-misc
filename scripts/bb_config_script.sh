@@ -45,8 +45,9 @@ sed -i -e 's/.*CONFIG_DPKG is not set/CONFIG_DPKG=y/g' .config
 # enable the 'inotifyd' program
 sed -i -e 's/.*CONFIG_INOTIFYD is not set/CONFIG_INOTIFYD=y/g' .config
 
-# enable the 'taskset' program
+# enable the 'taskset' program with fancy output
 sed -i -e 's/.*CONFIG_TASKSET is not set/CONFIG_TASKSET=y/g' .config
+sed -i -e 's/.*CONFIG_FEATURE_TASKSET_FANCY is not set/CONFIG_FEATURE_TASKSET_FANCY=y/g' .config
 
 # enable the 'tune2fs' program
 sed -i -e 's/.*CONFIG_TUNE2FS is not set/CONFIG_TUNE2FS=y/g' .config
