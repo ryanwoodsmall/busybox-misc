@@ -19,7 +19,7 @@ if `echo ${FULLREQ} | grep -q /$` ; then
   for i in `ls ${FULLPATH}` ; do
     ls -lAd ${FULLPATH}${i} | \
       sed "s#${HTTPDTOPDIR}##g" | \
-      egrep -v '(^total |cgi-bin)' | \
+      egrep -v '^total ' | \
       sed "s#${i}#<a href=\"${i}\">${i}</a>#g" | \
       sort | \
       tr '\n' '|' | \
