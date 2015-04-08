@@ -63,6 +63,9 @@ sed -i -e 's/.*CONFIG_NC_110_COMPAT is not set/CONFIG_NC_110_COMPAT=y/g' .config
 sed -i -e 's/.*CONFIG_FEATURE_BLKID_TYPE is not set/CONFIG_FEATURE_BLKID_TYPE=y/g' .config
 sed -i -e 's/.*CONFIG_FEATURE_VOLUMEID_SQUASHFS is not set/CONFIG_FEATURE_VOLUMEID_SQUASHFS=y/g' .config
 
+# disable FTP authentication - breaks anonymous ftpd
+sed -i -e 's/CONFIG_FEATURE_FTP_AUTHENTICATION=y/# CONFIG_FEATURE_FTP_AUTHENTICATION is not set/g' .config
+
 # enable bash applet thing
 sed -i -e '/CONFIG_FEATURE_BASH_IS_/d' .config
 echo '# CONFIG_FEATURE_BASH_IS_HUSH is not set' >>.config
