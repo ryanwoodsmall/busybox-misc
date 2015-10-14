@@ -66,6 +66,15 @@ sed -i -e 's/.*CONFIG_FEATURE_VOLUMEID_SQUASHFS is not set/CONFIG_FEATURE_VOLUME
 # disable FTP authentication - breaks anonymous ftpd
 sed -i -e 's/CONFIG_FEATURE_FTP_AUTHENTICATION=y/# CONFIG_FEATURE_FTP_AUTHENTICATION is not set/g' .config
 
+# enable gzip compression levels
+sed -i -e 's/.*CONFIG_FEATURE_GZIP_LEVELS is not set/CONFIG_FEATURE_GZIP_LEVELS=y/g' .config
+
+# disable fancy sync
+sed -i -e 's/CONFIG_FEATURE_SYNC_FANCY=y/# CONFIG_FEATURE_SYNC_FANCY is not set/g' .config
+
+# enable mount helpers
+sed -i -e 's/# CONFIG_FEATURE_MOUNT_HELPERS is not set/CONFIG_FEATURE_MOUNT_HELPERS=y/g' .config
+
 # enable bash applet thing
 sed -i -e '/CONFIG_FEATURE_BASH_IS_/d' .config
 echo '# CONFIG_FEATURE_BASH_IS_HUSH is not set' >>.config
