@@ -1,0 +1,96 @@
+#!/bin/sh
+
+# initrd/initramfs /init script
+#   http://jootamam.net/howto-initramfs-image.htm
+
+PATH=/usr/sbin:/sbin:/usr/bin:/bin
+export PATH
+
+# mount basic stuff
+/bin/busybox mount -t proc proc /proc
+/bin/busybox mount -t sysfs sysfs /sys
+
+# no kernel messages on the screen
+/bin/busybox echo 0 > /proc/sys/kernel/printk
+
+# clear screen
+/bin/busybox clear
+
+# create busybox symlinks with the installer
+/bin/busybox --install -s
+
+# if you don't have a busybox built with the installer...
+#OGDIR="$PWD"
+#for d in /sbin /bin ; do
+#	for l in $(/bin/busybox --list) ; do
+#		/bin/busybox test -e $d/$l || /bin/busybox ln -s /bin/busybox $d/$l
+#	done
+#done
+#cd $OGDIR
+
+# null and tty need to be created manually for now
+mknod /dev/null c 1 3
+mknod /dev/tty c 5 0
+
+# unix98 ptys
+mkdir /dev/pts
+mount devpts /dev/pts -t devpts
+
+# posix shared memory in tmpfs
+mkdir /dev/shm
+mount tmpfs /dev/shm -t tmpfs
+
+# start the syslogger
+syslogd -S -D &
+
+# device management - use uevent if possible
+#mdev -s
+uevent mdev &
+mdev -s
+
+#Function for parsing command line options with "=" in them
+# get_opt("init=/sbin/init") will return "/sbin/init"
+get_opt() {
+	echo "$@" | cut -d "=" -f 2
+}
+
+# XXX - ignore init=, root= in /proc/cmdline for now
+#Defaults
+#init="/sbin/init"
+#root="/dev/hda1"
+
+#Process command line options
+for i in $(cat /proc/cmdline); do
+	case $i in
+		root\=*)
+			root=$(get_opt $i)
+			;;
+		init\=*)
+			init=$(get_opt $i)
+			;;
+	esac
+done
+
+#Mount the root device
+#mount "${root}" /newroot
+
+#Check if $init exists and is executable
+#if [[ -x "/newroot/${init}" ]] ; then
+#	#Unmount all other mounts so that the ram used by
+#	#the initramfs can be cleared after switch_root
+#	umount /sys /proc
+#	
+#	#Switch to the new root and execute init
+#	exec switch_root /newroot "${init}"
+#fi
+# XXX - end ignore init=, root= in /proc/cmdline for now
+
+# start and fork the busybox DHCP client - eth0 by default
+udhcpc &
+
+# start dropbear SSH if we have it
+test -e /usr/sbin/dropbear && /usr/sbin/dropbear -B -R &
+
+# start a shell with tty control hack since it's on /dev/console
+#   https://busybox.net/FAQ.html#job_control
+setsid cttyhack ash -l

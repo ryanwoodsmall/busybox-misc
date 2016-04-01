@@ -1,0 +1,93 @@
+.: directory
+./proc: directory
+./sbin: directory
+./sbin/init: symbolic link to `../bin/busybox'
+./filelist.txt: ASCII text
+./init: POSIX shell script text executable
+./dev: directory
+./lib: directory
+./lib/modules: directory
+./lib/modules/2.6.30-krg3.0.0: directory
+./lib/modules/2.6.30-krg3.0.0/modules.inputmap: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.alias: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.usbmap: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.seriomap: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.softdep: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.ofmap: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.ccwmap: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.order: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.isapnpmap: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.dep.bin: data
+./lib/modules/2.6.30-krg3.0.0/modules.symbols.bin: data
+./lib/modules/2.6.30-krg3.0.0/source: broken symbolic link to `/usr/src/kerrighed-3.0.0/_kernel'
+./lib/modules/2.6.30-krg3.0.0/modules.ieee1394map: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.alias.bin: data
+./lib/modules/2.6.30-krg3.0.0/build: broken symbolic link to `/usr/src/kerrighed-3.0.0/kernel'
+./lib/modules/2.6.30-krg3.0.0/modules.pcimap: ASCII C++ program text
+./lib/modules/2.6.30-krg3.0.0/kernel: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/arch: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/arch/x86: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/arch/x86/kernel: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/arch/x86/kernel/test_nx.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/probes: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/probes/mosix_probe.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/probes/migration_probe.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/policies: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/policies/round_robin_balancer.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/policies/mosix_load_balancer.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/filters: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/filters/remote_cache_filter.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/filters/freq_limit_filter.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/kerrighed/scheduler/filters/threshold_filter.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/kernel/drivers: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/drivers/scsi: directory
+./lib/modules/2.6.30-krg3.0.0/kernel/drivers/scsi/scsi_wait_scan.ko: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+./lib/modules/2.6.30-krg3.0.0/modules.dep: ASCII text
+./lib/modules/2.6.30-krg3.0.0/modules.symbols: ASCII text
+./README.txt: ASCII text
+./tmp: sticky directory
+./etc: directory
+./etc/passwd: ASCII text
+./etc/hostname: ASCII text
+./etc/group: ASCII text
+./etc/resolv.conf: broken symbolic link to `/etc/udhcpc/resolv.conf'
+./etc/dropbear: directory
+./etc/mdev.conf: empty
+./etc/shells: ASCII text
+./etc/hosts: ASCII text
+./etc/udhcpc: directory
+./etc/udhcpc/resolv.conf: ASCII text
+./etc/udhcpd.conf: ASCII English text
+./var: directory
+./var/spool: directory
+./var/spool/cron: directory
+./var/lib: directory
+./var/lib/misc: directory
+./var/run: directory
+./var/service: directory
+./var/log: directory
+./usr: directory
+./usr/sbin: directory
+./usr/sbin/dropbear: broken symbolic link to `/usr/bin/dropbearmulti'
+./usr/share: directory
+./usr/share/udhcpc: directory
+./usr/share/udhcpc/sample.bound: POSIX shell script text executable
+./usr/share/udhcpc/sample.renew: POSIX shell script text executable
+./usr/share/udhcpc/sample.script: POSIX shell script text executable
+./usr/share/udhcpc/sample.deconfig: POSIX shell script text executable
+./usr/share/udhcpc/default.script: POSIX shell script text executable
+./usr/share/udhcpc/sample.nak: POSIX shell script text executable
+./usr/share/udhcpc/simple.script: POSIX shell script text executable
+./usr/bin: directory
+./usr/bin/dropbearconvert: broken symbolic link to `/usr/bin/dropbearmulti'
+./usr/bin/dbclient: broken symbolic link to `/usr/bin/dropbearmulti'
+./usr/bin/dropbearkey: broken symbolic link to `/usr/bin/dropbearmulti'
+./usr/bin/dropbearmulti: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
+./usr/bin/scp: broken symbolic link to `/usr/bin/dropbearmulti'
+./bin: directory
+./bin/busybox: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped
+./bin/sh: symbolic link to `busybox'
+./sys: directory
+./root: directory
