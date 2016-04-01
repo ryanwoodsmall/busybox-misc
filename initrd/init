@@ -16,8 +16,11 @@ export PATH
 # clear screen
 /bin/busybox clear
 
+# create busybox hardlinks with the installer
+/bin/busybox --install
+
 # create busybox symlinks with the installer
-/bin/busybox --install -s
+#/bin/busybox --install -s
 
 # if you don't have a busybox built with the installer...
 #OGDIR="$PWD"
