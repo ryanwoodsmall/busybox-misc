@@ -3,7 +3,7 @@
 # initrd/initramfs /init script
 #   http://jootamam.net/howto-initramfs-image.htm
 
-PATH=/usr/sbin:/sbin:/usr/bin:/bin
+PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin
 export PATH
 
 # mount basic stuff

@@ -1,0 +1,5 @@
+PATH=/usr/local/bin:$PATH
+PATH=/sbin:$PATH
+PATH=/usr/sbin:$PATH
+PATH=/usr/local/sbin:$PATH
+export PATH
