@@ -29,7 +29,6 @@ todo:
 - rpcbind
   - more from alpine: http://git.alpinelinux.org/cgit/aports/tree/main/rpcbind
 - nfs (nfs-utils?)
-- fixup (simplify, un-LSB) kerrighed scripts
 - in-initrd musl based toolchain (leverage crosstool-ng)
 
 Sabotage and Alpine are good small distros with lots of great, useful bits.
