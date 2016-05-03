@@ -7,6 +7,9 @@ PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin
 export PATH
 
 # mount basic stuff
+/bin/busybox mkdir -p /dev
+/bin/busybox mkdir -p /proc
+/bin/busybox mkdir -p /sys
 /bin/busybox mount -t proc proc /proc
 /bin/busybox mount -t sysfs sysfs /sys
 
