@@ -95,6 +95,7 @@ done
 udhcpc &
 
 # start dropbear SSH if we have it
+test -e /etc/dropbear || mkdir -p /etc/dropbear
 test -e /usr/sbin/dropbear && /usr/sbin/dropbear -B -R &
 
 # start a shell with tty control hack since it's on /dev/console
