@@ -31,6 +31,15 @@ todo:
 - nfs (nfs-utils?)
 - in-initrd musl based toolchain (leverage crosstool-ng)
 
+uClibc-ng is probably better for NFS roots
+- need /etc/rpc file (?)
+- chroot/pivot_root
+- dhcpc/dhclient
+- copy resolv.conf
+- disable network/NetworkManager startups
+- copy busybox into new root fs
+- kill any initramfs procs before chroot
+
 Sabotage and Alpine are good small distros with lots of great, useful bits.
   http://sabotage.tech/ - https://github.com/sabotage-linux/sabotage
   http://www.alpinelinux.org/ - http://git.alpinelinux.org/
