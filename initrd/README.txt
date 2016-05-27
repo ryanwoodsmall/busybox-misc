@@ -23,7 +23,7 @@ only user is "root" - no password, dropbear configured to allow no password logi
 see "example_filelist.txt" for full list of files and their types in an example initrd
 
 todo:
-- rpc (libtirpc? libdrpc looks like a lot of work)
+- rpc (libtirpc? libdrpc looks like a lot of work) - use uclibc-ng for now!
   - patches from http://git.alpinelinux.org/cgit/aports/tree/main/libtirpc?h=master (musl-fixes.patch , nis.h)
   - sys/queue.h (libc-dev in alpine)
 - rpcbind
@@ -32,7 +32,7 @@ todo:
 - in-initrd musl based toolchain (leverage crosstool-ng)
 
 uClibc-ng is probably better for NFS roots
-- need /etc/rpc file (?)
+
 - chroot/pivot_root
 - dhcpc/dhclient
 - copy resolv.conf
