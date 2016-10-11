@@ -36,7 +36,7 @@ test -e /etc/redhat-release && {
 		toggle_on CONFIG_PAM
 	}
 	# rhel == 6
-	rpm --eval '%{rhel}' | grep -q ^6 & {
+	rpm --eval '%{rhel}' | grep -q ^6 && {
 		# XXX - MTD_MODE_RAW vs MTD_FILE_MODE_RAW - #ifndef/#define?
 		# http://lists.busybox.net/pipermail/buildroot/2013-October/080960.html
 		toggle_off CONFIG_NANDWRITE
