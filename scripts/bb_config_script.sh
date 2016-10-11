@@ -1,3 +1,23 @@
+# simple delete/toggle_off/toggle_on 
+
+function delete_setting() {
+	sed -i -e "/^${1}=y/d" .config
+	sed -i -e "/^# ${1} is not set/d" .config
+}
+
+function toggle_off() {
+	delete_setting "${1}"
+	echo "# ${1} is not set" >> .config
+}
+
+function toggle_on() {
+	delete_setting "${1}"
+	echo "${1}=y" >> .config
+}
+
+# backup any .config
+test -e .config && cp .config{,.PRE-$(date '+%Y%m%d%H%M%S')}
+
 # clean up after ourself
 make distclean
 
@@ -7,6 +27,28 @@ make defconfig
 # make a static binary
 sed -i -e '/CONFIG_STATIC/d' .config
 echo "CONFIG_STATIC=y" >>.config
+
+# rhel/centos 6 and 7 specific settings
+test -e /etc/redhat-release && {
+	# rhel == 7
+	rpm --eval '%{rhel}' | grep -q ^7 && {
+		toggle_off CONFIG_STATIC
+		toggle_on CONFIG_PAM
+	}
+	# rhel == 6
+	rpm --eval '%{rhel}' | grep -q ^6 & {
+		# XXX - MTD_MODE_RAW vs MTD_FILE_MODE_RAW - #ifndef/#define?
+		# http://lists.busybox.net/pipermail/buildroot/2013-October/080960.html
+		toggle_off CONFIG_NANDWRITE
+		toggle_off CONFIG_NANDDUMP
+		# XXX - no blkdiscard on rhel 6
+		toggle_off CONFIG_BLKDISCARD
+		# XXX - setns is not in glibc on rhel 6
+		# https://sourceforge.net/p/ltp/mailman/message/34252897/
+		toggle_off CONFIG_NSENTER
+		toggle_off CONFIG_FEATURE_NSENTER_LONG_OPTS
+	}
+}
 
 # enable "big" compatibility corner cases
 sed -i -e 's/.*CONFIG_EXTRA_COMPAT is not set/CONFIG_EXTRA_COMPAT=y/g' .config
