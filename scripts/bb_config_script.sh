@@ -25,10 +25,13 @@ make distclean
 make defconfig
 
 # make a static binary
-sed -i -e '/CONFIG_STATIC/d' .config
-echo "CONFIG_STATIC=y" >>.config
+toggle_on CONFIG_STATIC
 
 # rhel/centos 6 and 7 specific settings
+# XXX - these need to be optional/override-able so they're not picked up by:
+# - cross-compile
+# - separate native compiler/linker/loader/libc
+# - ...
 test -e /etc/redhat-release && {
 	# rhel == 7
 	rpm --eval '%{rhel}' | grep -q ^7 && {
@@ -51,82 +54,81 @@ test -e /etc/redhat-release && {
 }
 
 # enable "big" compatibility corner cases
-sed -i -e 's/.*CONFIG_EXTRA_COMPAT is not set/CONFIG_EXTRA_COMPAT=y/g' .config
+toggle_on CONFIG_EXTRA_COMPAT
 
 # enable busybox to store its config
-sed -i -e 's/.*CONFIG_BBCONFIG is not set/CONFIG_BBCONFIG=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_COMPRESS_BBCONFIG is not set/CONFIG_FEATURE_COMPRESS_BBCONFIG=y/g' .config
+toggle_on CONFIG_BBCONFIG
+toggle_on CONFIG_FEATURE_COMPRESS_BBCONFIG
 
 # disable the applet installer
-sed -i -e 's/^CONFIG_FEATURE_INSTALLER=y/# CONFIG_FEATURE_INSTALLER is not set/g' .config
-sed -i -e 's/^CONFIG_INSTALL_APPLET_SYMLINKS=y/# CONFIG_INSTALL_APPLET_SYMLINKS is not set/g' .config
-sed -i -e 's/.*CONFIG_INSTALL_NO_USR is not set/CONFIG_INSTALL_NO_USR=y/g' .config
-sed -i -e 's/.*CONFIG_INSTALL_APPLET_DONT is not set/CONFIG_INSTALL_APPLET_DONT=y/g' .config
+toggle_off CONFIG_FEATURE_INSTALLER
+toggle_off CONFIG_INSTALL_APPLET_SYMLINKS
+toggle_on CONFIG_INSTALL_NO_USR
+toggle_on CONFIG_INSTALL_APPLET_DONT
 
 # enable GPT disklabels in fdisk
-sed -i -e 's/.*CONFIG_FEATURE_GPT_LABEL is not set/CONFIG_FEATURE_GPT_LABEL=y/g' .config
+toggle_on CONFIG_FEATURE_GPT_LABEL
 
 # verbose message stuff
-sed -i -e 's/.*CONFIG_FEATURE_VERBOSE_CP_MESSAGE is not set/CONFIG_FEATURE_VERBOSE_CP_MESSAGE=y/g' .config
-sed -i -e 's/.*CONFIG_VERBOSE_RESOLUTION_ERRORS is not set/CONFIG_VERBOSE_RESOLUTION_ERRORS=y/g' .config
+toggle_on CONFIG_FEATURE_VERBOSE_CP_MESSAGE
+toggle_on CONFIG_VERBOSE_RESOLUTION_ERRORS
 
 # network extras
-sed -i -e 's/.*CONFIG_FEATURE_IP_RARE_PROTOCOLS is not set/CONFIG_FEATURE_IP_RARE_PROTOCOLS=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_TRACEROUTE_SOURCE_ROUTE is not set/CONFIG_FEATURE_TRACEROUTE_SOURCE_ROUTE=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_TRACEROUTE_USE_ICMP is not set/CONFIG_FEATURE_TRACEROUTE_USE_ICMP=y/g' .config
+toggle_on CONFIG_FEATURE_IP_RARE_PROTOCOLS
+toggle_on CONFIG_FEATURE_TRACEROUTE_SOURCE_ROUTE
+toggle_on CONFIG_FEATURE_TRACEROUTE_USE_ICMP
 
 # enable the 'ar' program
-sed -i -e 's/.*CONFIG_AR is not set/CONFIG_AR=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_AR_LONG_FILENAMES is not set/CONFIG_FEATURE_AR_LONG_FILENAMES=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_AR_CREATE is not set/CONFIG_FEATURE_AR_CREATE=y/g' .config
+toggle_on CONFIG_AR
+toggle_on CONFIG_FEATURE_AR_LONG_FILENAMES
+toggle_on CONFIG_FEATURE_AR_CREATE
 
 # enable the dpkg programs
-sed -i -e 's/.*CONFIG_DPKG_DEB is not set/CONFIG_DPKG_DEB=y/g' .config
-sed -i -e 's/.*CONFIG_DPKG is not set/CONFIG_DPKG=y/g' .config
+toggle_on CONFIG_DPKG_DEB
+toggle_on CONFIG_DPKG
 
 # enable the 'inotifyd' program
-sed -i -e 's/.*CONFIG_INOTIFYD is not set/CONFIG_INOTIFYD=y/g' .config
+toggle_on CONFIG_INOTIFYD
 
 # enable the 'taskset' program with fancy output
-sed -i -e 's/.*CONFIG_TASKSET is not set/CONFIG_TASKSET=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_TASKSET_FANCY is not set/CONFIG_FEATURE_TASKSET_FANCY=y/g' .config
+toggle_on CONFIG_TASKSET
+toggle_on CONFIG_FEATURE_TASKSET_FANCY
 
 # enable the 'tune2fs' program
-sed -i -e 's/.*CONFIG_TUNE2FS is not set/CONFIG_TUNE2FS=y/g' .config
+toggle_on CONFIG_TUNE2FS
 
 # enable the 'uncompress' program and .Z support
-sed -i -e 's/.*CONFIG_UNCOMPRESS is not set/CONFIG_UNCOMPRESS=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_SEAMLESS_Z is not set/CONFIG_FEATURE_SEAMLESS_Z=y/g' .config
+toggle_on CONFIG_UNCOMPRESS
+toggle_on CONFIG_FEATURE_SEAMLESS_Z
 
 # enable extra nc program options
-sed -i -e 's/.*CONFIG_NC_110_COMPAT is not set/CONFIG_NC_110_COMPAT=y/g' .config
+toggle_on CONFIG_NC_110_COMPAT
 
 # enable BLKID_TYPE and squashfs volume ID
-sed -i -e 's/.*CONFIG_FEATURE_BLKID_TYPE is not set/CONFIG_FEATURE_BLKID_TYPE=y/g' .config
-sed -i -e 's/.*CONFIG_FEATURE_VOLUMEID_SQUASHFS is not set/CONFIG_FEATURE_VOLUMEID_SQUASHFS=y/g' .config
+toggle_on CONFIG_FEATURE_BLKID_TYPE
+toggle_on CONFIG_FEATURE_VOLUMEID_SQUASHFS
 
 # disable FTP authentication - breaks anonymous ftpd
-sed -i -e 's/CONFIG_FEATURE_FTP_AUTHENTICATION=y/# CONFIG_FEATURE_FTP_AUTHENTICATION is not set/g' .config
+toggle_off CONFIG_FEATURE_FTP_AUTHENTICATION
 
 # enable gzip compression levels
-sed -i -e 's/.*CONFIG_FEATURE_GZIP_LEVELS is not set/CONFIG_FEATURE_GZIP_LEVELS=y/g' .config
+toggle_on CONFIG_FEATURE_GZIP_LEVELS
 
 # disable fancy sync
-sed -i -e 's/CONFIG_FEATURE_SYNC_FANCY=y/# CONFIG_FEATURE_SYNC_FANCY is not set/g' .config
+toggle_off CONFIG_FEATURE_SYNC_FANCY
 
 # enable mount helpers
-sed -i -e 's/# CONFIG_FEATURE_MOUNT_HELPERS is not set/CONFIG_FEATURE_MOUNT_HELPERS=y/g' .config
+toggle_on CONFIG_FEATURE_MOUNT_HELPERS
 
 # enable bash applet thing
-sed -i -e '/CONFIG_FEATURE_BASH_IS_/d' .config
-echo '# CONFIG_FEATURE_BASH_IS_HUSH is not set' >>.config
-echo '# CONFIG_FEATURE_BASH_IS_NONE is not set' >>.config
-echo 'CONFIG_FEATURE_BASH_IS_ASH=y' >>.config
+toggle_off CONFIG_FEATURE_BASH_IS_HUSH
+toggle_off CONFIG_FEATURE_BASH_IS_NONE
+toggle_on CONFIG_FEATURE_BASH_IS_ASH
 
 # rewrite config
 make oldconfig
 
 # build it
-echo ''
+echo
 echo "now run 'make'"
-echo ''
+echo
