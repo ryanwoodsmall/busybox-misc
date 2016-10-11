@@ -1,3 +1,9 @@
+#!/bin/bash
+
+# TODO:
+# - musl option
+# - ulibc option
+
 # simple delete/toggle_off/toggle_on 
 
 function delete_setting() {
@@ -119,6 +125,10 @@ toggle_off CONFIG_FEATURE_SYNC_FANCY
 
 # enable mount helpers
 toggle_on CONFIG_FEATURE_MOUNT_HELPERS
+
+# enable larger but faster code
+toggle_on CONFIG_FEATURE_FAST_TOP
+toggle_on CONFIG_FEATURE_LZMA_FAST
 
 # enable bash applet thing
 toggle_off CONFIG_FEATURE_BASH_IS_HUSH
