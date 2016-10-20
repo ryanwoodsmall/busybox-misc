@@ -1,20 +1,19 @@
 #!/bin/bash
 
 # TODO:
-# - musl option
 # - ulibc option
-# - installer option
-# - path (/usr CONFIG_INSTALL_NO_USR) option
 
 # who are we
 scriptname="$(basename "${BASH_SOURCE[0]}")"
 
 # defaults
 musl=0
-uclibc=0
+installer=0
+usrpath=0
 rhel6=0
 rhel7=0
 static=0
+uclibc=0
 
 # simple delete/toggle_off/toggle_on  functions
 function delete_setting() {
@@ -35,18 +34,20 @@ function toggle_on() {
 # options/usage
 function usage() {
 	cat <<-EOF
-	${scriptname} [-6] [-7] [-m] [-u] [-s]
+	${scriptname} [-6] [-7] [-i] [-m] [-p] [-s] [-m]
 	  -6 : rhel/centos 6 specific options
 	  -7 : rhel/centos 7 specific options
+	  -i : include "busybox --install" support
 	  -m : musl specific options
-	  -u : uclibc/uclibc-ng specific options
+	  -p : use /usr for "busybox --install"
 	  -s : force static
+	  -u : uclibc/uclibc-ng specific options
 	EOF
 	exit 1
 }
 
 # read options
-while getopts ":67mu" opt ; do
+while getopts ":67impsu" opt ; do
 	case ${opt} in
 		6)
 			rhel6=1
@@ -54,14 +55,20 @@ while getopts ":67mu" opt ; do
 		7)
 			rhel7=1
 			;;
+		i)
+			installer=1
+			;;
 		m)
 			musl=1
 			;;
-		u)
-			uclibc=1
+		p)
+			usrpath=1
 			;;
 		s)
 			static=1
+			;;
+		u)
+			uclibc=1
 			;;
 		\?)
 			usage
@@ -112,10 +119,21 @@ toggle_on CONFIG_EXTRA_COMPAT
 toggle_on CONFIG_BBCONFIG
 toggle_on CONFIG_FEATURE_COMPRESS_BBCONFIG
 
-# disable the applet installer
-toggle_off CONFIG_FEATURE_INSTALLER
+# disable the applet installer by default
+if [ "${installer}" -eq 0 ] ; then
+	toggle_off CONFIG_FEATURE_INSTALLER
+fi
+# disable the use of /usr on "busybox --install" by default
+if [ "${usrpath}" -eq 0 ] ; then
+	toggle_on CONFIG_INSTALL_NO_USR
+fi
+
+# "make install" only
+# don't setup any applet hard or symbolic links or script wrappers
+# does this need to be configurable? (no?)
+toggle_off CONFIG_INSTALL_APPLET_HARDLINKS
+toggle_off CONFIG_INSTALL_APPLET_SCRIPT_WRAPPERS
 toggle_off CONFIG_INSTALL_APPLET_SYMLINKS
-toggle_on CONFIG_INSTALL_NO_USR
 toggle_on CONFIG_INSTALL_APPLET_DONT
 
 # enable GPT disklabels in fdisk
