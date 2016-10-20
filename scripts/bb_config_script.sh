@@ -1,7 +1,29 @@
 #!/bin/bash
 
-# TODO:
-# - ulibc option
+#
+# versions tested
+#
+#   busybox : 1.25.1 (stable)
+#   rhel : 6, 7 with default glibc
+#   musl : 1.1.15 (rhel6, static, without ipv6)
+#   uclibc-ng : 1.0.17 (rhel6, static, rpc, config(s) linked below)
+#
+
+#
+# links:
+#
+#  uclibc-ng configs:
+#    https://github.com/ryanwoodsmall/uclibc-misc/tree/master/conf
+#
+
+# TODO
+#
+#   debug option(s)
+#   locale (uclibc/glibc only, no musl?)
+#   selinux (ugh)
+#   systemd (double ugh)
+#   unicode
+#
 
 # who are we
 scriptname="$(basename "${BASH_SOURCE[0]}")"
@@ -214,10 +236,19 @@ if [ "${musl}" -eq 1 ] ; then
 	toggle_off CONFIG_LAST
 	toggle_off CONFIG_MONOTONIC_SYSCALL
 	toggle_off CONFIG_PING6
+	toggle_off CONFIG_RUNLEVEL
 	toggle_off CONFIG_TRACEROUTE6
 	toggle_off CONFIG_USERS
 	toggle_off CONFIG_WALL
 	toggle_off CONFIG_WHO
+fi
+
+# uclibc override options
+if [ "${uclibc}" -eq 1 ] ; then
+	toggle_on CONFIG_FEATURE_HAVE_RPC
+	toggle_on CONFIG_FEATURE_INETD_RPC
+	toggle_off CONFIG_MONOTONIC_SYSCALL
+	toggle_on CONFIG_UNICODE_WIDE_WCHARS
 fi
 
 # rewrite config
