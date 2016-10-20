@@ -103,6 +103,8 @@ if [ "${static}" -eq 1 ] ; then
 	toggle_on CONFIG_STATIC
 fi
 
+# uclibc/musl overrides are below
+
 # enable "big" compatibility corner cases
 toggle_on CONFIG_EXTRA_COMPAT
 
@@ -178,6 +180,27 @@ toggle_on CONFIG_FEATURE_LZMA_FAST
 toggle_off CONFIG_FEATURE_BASH_IS_HUSH
 toggle_off CONFIG_FEATURE_BASH_IS_NONE
 toggle_on CONFIG_FEATURE_BASH_IS_ASH
+
+# musl override options
+if [ "${musl}" -eq 1 ] ; then
+	# XXX - mostly ipv6 stuff, can probably be fixed/enabled
+	toggle_off CONFIG_EXTRA_COMPAT
+	toggle_off CONFIG_FEATURE_IFUPDOWN_IPV6
+	toggle_off CONFIG_FEATURE_IPV6
+	toggle_off CONFIG_FEATURE_LAST_FANCY
+	toggle_off CONFIG_FEATURE_PREFER_IPV4_ADDRESS
+	toggle_off CONFIG_FEATURE_UPTIME_UTMP_SUPPORT
+	toggle_off CONFIG_FEATURE_UTMP
+	toggle_off CONFIG_FEATURE_WTMP
+	toggle_off CONFIG_IFPLUGD
+	toggle_off CONFIG_LAST
+	toggle_off CONFIG_MONOTONIC_SYSCALL
+	toggle_off CONFIG_PING6
+	toggle_off CONFIG_TRACEROUTE6
+	toggle_off CONFIG_USERS
+	toggle_off CONFIG_WALL
+	toggle_off CONFIG_WHO
+fi
 
 # rewrite config
 make oldconfig
