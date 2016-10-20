@@ -3,9 +3,20 @@
 # TODO:
 # - musl option
 # - ulibc option
+# - installer option
+# - path (/usr CONFIG_INSTALL_NO_USR) option
 
-# simple delete/toggle_off/toggle_on 
+# who are we
+scriptname="$(basename "${BASH_SOURCE[0]}")"
 
+# defaults
+musl=0
+uclibc=0
+rhel6=0
+rhel7=0
+static=0
+
+# simple delete/toggle_off/toggle_on  functions
 function delete_setting() {
 	sed -i -e "/^${1}=y/d" .config
 	sed -i -e "/^# ${1} is not set/d" .config
@@ -21,6 +32,43 @@ function toggle_on() {
 	echo "${1}=y" >> .config
 }
 
+# options/usage
+function usage() {
+	cat <<-EOF
+	${scriptname} [-6] [-7] [-m] [-u] [-s]
+	  -6 : rhel/centos 6 specific options
+	  -7 : rhel/centos 7 specific options
+	  -m : musl specific options
+	  -u : uclibc/uclibc-ng specific options
+	  -s : force static
+	EOF
+	exit 1
+}
+
+# read options
+while getopts ":67mu" opt ; do
+	case ${opt} in
+		6)
+			rhel6=1
+			;;
+		7)
+			rhel7=1
+			;;
+		m)
+			musl=1
+			;;
+		u)
+			uclibc=1
+			;;
+		s)
+			static=1
+			;;
+		\?)
+			usage
+			;;
+	esac
+done
+
 # backup any .config
 test -e .config && cp .config{,.PRE-$(date '+%Y%m%d%H%M%S')}
 
@@ -30,34 +78,30 @@ make distclean
 # start with default config
 make defconfig
 
-# make a static binary
+# make a static binary (default)
 toggle_on CONFIG_STATIC
 
 # rhel/centos 6 and 7 specific settings
-# XXX - these need to be optional/override-able so they're not picked up by:
-# - cross-compile
-# - separate native compiler/linker/loader/libc
-# - ...
-test -e /etc/redhat-release && {
-	# rhel == 7
-	rpm --eval '%{rhel}' | grep -q ^7 && {
-		toggle_off CONFIG_STATIC
-		toggle_on CONFIG_PAM
-	}
-	# rhel == 6
-	rpm --eval '%{rhel}' | grep -q ^6 && {
-		# XXX - MTD_MODE_RAW vs MTD_FILE_MODE_RAW - #ifndef/#define?
-		# http://lists.busybox.net/pipermail/buildroot/2013-October/080960.html
-		toggle_off CONFIG_NANDWRITE
-		toggle_off CONFIG_NANDDUMP
-		# XXX - no blkdiscard on rhel 6
-		toggle_off CONFIG_BLKDISCARD
-		# XXX - setns is not in glibc on rhel 6
-		# https://sourceforge.net/p/ltp/mailman/message/34252897/
-		toggle_off CONFIG_NSENTER
-		toggle_off CONFIG_FEATURE_NSENTER_LONG_OPTS
-	}
-}
+if [ "${rhel7}" -eq 1 ] ; then
+	toggle_off CONFIG_STATIC
+	toggle_on CONFIG_PAM
+elif [ "${rhel6}" -eq 1 ] ; then
+	# XXX - MTD_MODE_RAW vs MTD_FILE_MODE_RAW - #ifndef/#define?
+	# http://lists.busybox.net/pipermail/buildroot/2013-October/080960.html
+	toggle_off CONFIG_NANDWRITE
+	toggle_off CONFIG_NANDDUMP
+	# XXX - no blkdiscard on rhel 6
+	toggle_off CONFIG_BLKDISCARD
+	# XXX - setns is not in glibc on rhel 6
+	# https://sourceforge.net/p/ltp/mailman/message/34252897/
+	toggle_off CONFIG_NSENTER
+	toggle_off CONFIG_FEATURE_NSENTER_LONG_OPTS
+fi
+
+# check for force static here since we may reset on rhel-specific above
+if [ "${static}" -eq 1 ] ; then
+	toggle_on CONFIG_STATIC
+fi
 
 # enable "big" compatibility corner cases
 toggle_on CONFIG_EXTRA_COMPAT
