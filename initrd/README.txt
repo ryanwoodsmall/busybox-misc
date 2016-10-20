@@ -1,15 +1,23 @@
 example busybox based initrd with dropbear ssh
 
-musl-libc - version 1.1.14 - static linking only
+this is an attempt at an in-memory SSI cluster using kerrighed
+
+musl-libc - version 1.1.15 - static linking only
   config: ./configure --prefix=/usr/local/musl --disable-shared --enable-debug
+*or* 
+uclibc-ng - version 1.0.17 - static as well
+  configs: https://github.com/ryanwoodsmall/uclibc-misc/tree/master/conf
 
-busybox - version 1.24.1 - built, statically linked with musl-libc
-  config: https://github.com/ryanwoodsmall/busybox-misc/tree/master/configs
+busybox - version 1.25.1 - built, statically linked
+  config: run bb_config.sh script with "-m -i" options for musl and "busybox --install" support
+  config: run bb_config.sh script with "-u -i" options for uclibc-ng and "busybox --install" support
 
-dropbear - version 2016.73 - built with multi config, statically linked with musl-libc
+dropbear - version 2016.74 - built with multi config, statically linked with musl-libc (should work w/uclibc-ng)
   config, build: https://github.com/ryanwoodsmall/dropbear-misc/tree/master/musl
 
 example kernel version is 2.6.30-krg3.0.0 - Kerrighed 3.0.0 single system image cluster
+
+(a vanilla kernel 4.4.x using a fedora .config should work if a single node is doable)
 
 binaries and lib modules copied to proper places in init tree
 
