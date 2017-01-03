@@ -201,7 +201,7 @@ toggle_on CONFIG_FEATURE_BLKID_TYPE
 toggle_on CONFIG_FEATURE_VOLUMEID_SQUASHFS
 
 # disable FTP authentication - breaks anonymous ftpd
-toggle_off CONFIG_FEATURE_FTP_AUTHENTICATION
+toggle_off CONFIG_FEATURE_FTPD_AUTHENTICATION
 
 # enable gzip compression levels
 toggle_on CONFIG_FEATURE_GZIP_LEVELS
@@ -217,9 +217,14 @@ toggle_on CONFIG_FEATURE_FAST_TOP
 toggle_on CONFIG_FEATURE_LZMA_FAST
 
 # enable bash applet thing
-toggle_off CONFIG_FEATURE_BASH_IS_HUSH
-toggle_off CONFIG_FEATURE_BASH_IS_NONE
-toggle_on CONFIG_FEATURE_BASH_IS_ASH
+toggle_off CONFIG_BASH_IS_HUSH
+toggle_off CONFIG_BASH_IS_NONE
+toggle_on CONFIG_BASH_IS_ASH
+
+# sh is also ash
+toggle_off CONFIG_FEATURE_SH_IS_HUSH
+toggle_off CONFIG_FEATURE_SH_IS_NONE
+toggle_on CONFIG_FEATURE_SH_IS_ASH
 
 # musl override options
 if [ "${musl}" -eq 1 ] ; then
