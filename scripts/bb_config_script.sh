@@ -3,10 +3,10 @@
 #
 # versions tested
 #
-#   busybox : 1.25.1 (stable)
+#   busybox : 1.26.1 (stable)
 #   rhel : 6, 7 with default glibc
-#   musl : 1.1.15 (rhel6, static, without ipv6)
-#   uclibc-ng : 1.0.17 (rhel6, static, rpc, config(s) linked below)
+#   musl : 1.1.16 (rhel6, static, without ipv6)
+#   uclibc-ng : 1.0.21 (rhel6, static, rpc, config(s) linked below)
 #
 
 #
@@ -105,6 +105,7 @@ test -e .config && cp .config{,.PRE-$(date '+%Y%m%d%H%M%S')}
 make distclean
 
 # start with default config
+test -e .config && rm -f .config
 make defconfig
 
 # make a static binary (default)
@@ -225,6 +226,14 @@ toggle_on CONFIG_BASH_IS_ASH
 toggle_off CONFIG_FEATURE_SH_IS_HUSH
 toggle_off CONFIG_FEATURE_SH_IS_NONE
 toggle_on CONFIG_FEATURE_SH_IS_ASH
+
+# kernel module 
+toggle_off CONFIG_MODPROBE_SMALL
+toggle_on CONFIG_FEATURE_LSMOD_PRETTY_2_6_OUTPUT
+toggle_on CONFIG_FEATURE_MODPROBE_BLACKLIST
+# XXX - ugly fix for uclibc-ng 1.0.21+
+grep -q '^#ifdef __UCLIBC__$' modutils/modutils.c && \
+	sed -i.ORIG '/__UCLIBC__/ s/__UCLIBC__/__UCLIBCOLD__/g' modutils/modutils.c
 
 # musl override options
 if [ "${musl}" -eq 1 ] ; then
