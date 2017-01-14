@@ -265,6 +265,12 @@ if [ "${uclibc}" -eq 1 ] ; then
 	toggle_on CONFIG_UNICODE_WIDE_WCHARS
 fi
 
+# we should be able to safely enable nsenter w/musl or uclibc-ng
+if [ "${musl}" -eq 1 -o "${uclibc}" -eq 1 ] ; then
+	toggle_on CONFIG_NSENTER
+	toggle_on CONFIG_FEATURE_NSENTER_LONG_OPTS
+fi
+
 # rewrite config
 make oldconfig
 
