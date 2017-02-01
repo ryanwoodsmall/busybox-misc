@@ -6,7 +6,7 @@
 #   busybox : 1.26.2 (stable)
 #   rhel : 6, 7 with default glibc
 #   musl : 1.1.16 (rhel6, static, without ipv6)
-#   uclibc-ng : 1.0.21 (rhel6, static, rpc, config(s) linked below)
+#   uclibc-ng : 1.0.22 (rhel6, static, rpc, config(s) linked below)
 #
 
 #
@@ -268,6 +268,7 @@ if [ "${musl}" -eq 1 -o "${uclibc}" -eq 1 ] ; then
 	toggle_on CONFIG_NSENTER
 	toggle_on CONFIG_FEATURE_NSENTER_LONG_OPTS
 	toggle_off CONFIG_MONOTONIC_SYSCALL
+	toggle_off CONFIG_PAM
 fi
 
 # rewrite config
