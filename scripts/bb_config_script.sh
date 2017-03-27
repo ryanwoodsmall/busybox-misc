@@ -235,29 +235,43 @@ toggle_on CONFIG_FEATURE_MODPROBE_BLACKLIST
 grep -q '^#ifdef __UCLIBC__$' modutils/modutils.c && \
 	sed -i.ORIG '/__UCLIBC__/ s/__UCLIBC__/__UCLIBCOLD__/g' modutils/modutils.c
 
+# XXX - need to figure out monotonic syscall for all 3 standard c libraries and 2 rhel versions
+
 # musl override options
 if [ "${musl}" -eq 1 ] ; then
 	# XXX - mostly ipv6 stuff, can probably be fixed/enabled
 	toggle_off CONFIG_EXTRA_COMPAT
-	toggle_off CONFIG_FEATURE_IFUPDOWN_IPV6
-	toggle_off CONFIG_FEATURE_IPV6
-	toggle_off CONFIG_FEATURE_LAST_FANCY
-	toggle_off CONFIG_FEATURE_PREFER_IPV4_ADDRESS
-	toggle_off CONFIG_FEATURE_UPTIME_UTMP_SUPPORT
-	toggle_off CONFIG_FEATURE_UTMP
-	toggle_off CONFIG_FEATURE_WTMP
+	toggle_off CONFIG_FEATURE_HAVE_RPC
+	toggle_off CONFIG_FEATURE_INETD_RPC
+	toggle_off CONFIG_FEATURE_MOUNT_NFS
+	toggle_off CONFIG_FEATURE_SYSTEMD
+	toggle_off CONFIG_FEATURE_VI_REGEX_SEARCH
+	# XXX - ifplug needs a patch
 	toggle_off CONFIG_IFPLUGD
-	toggle_off CONFIG_LAST
-	toggle_off CONFIG_PING6
-	toggle_off CONFIG_RUNLEVEL
-	toggle_off CONFIG_TRACEROUTE6
-	toggle_off CONFIG_USERS
-	toggle_off CONFIG_WALL
-	toggle_off CONFIG_WHO
+	toggle_off CONFIG_SELINUX
+	toggle_off CONFIG_SELINUXENABLED
+	toggle_off CONFIG_WERROR
+	# XXX - redundant?
+	toggle_on CONFIG_FEATURE_IFUPDOWN_IPV6
+	toggle_on CONFIG_FEATURE_IPV6
+	toggle_on CONFIG_FEATURE_LAST_FANCY
+	toggle_on CONFIG_FEATURE_PREFER_IPV4_ADDRESS
+	toggle_on CONFIG_FEATURE_UPTIME_UTMP_SUPPORT
+	toggle_on CONFIG_FEATURE_UTMP
+	toggle_on CONFIG_FEATURE_WTMP
+	toggle_on CONFIG_LAST
+	toggle_on CONFIG_MONOTONIC_SYSCALL
+	toggle_on CONFIG_PING6
+	toggle_on CONFIG_RUNLEVEL
+	toggle_on CONFIG_TRACEROUTE6
+	toggle_on CONFIG_USERS
+	toggle_on CONFIG_WALL
+	toggle_on CONFIG_WHO
 fi
 
 # uclibc override options
 if [ "${uclibc}" -eq 1 ] ; then
+	toggle_off CONFIG_MONOTONIC_SYSCALL
 	toggle_on CONFIG_FEATURE_HAVE_RPC
 	toggle_on CONFIG_FEATURE_INETD_RPC
 	toggle_on CONFIG_UNICODE_WIDE_WCHARS
@@ -267,7 +281,6 @@ fi
 if [ "${musl}" -eq 1 -o "${uclibc}" -eq 1 ] ; then
 	toggle_on CONFIG_NSENTER
 	toggle_on CONFIG_FEATURE_NSENTER_LONG_OPTS
-	toggle_off CONFIG_MONOTONIC_SYSCALL
 	toggle_off CONFIG_PAM
 fi
 
