@@ -3,6 +3,7 @@
 # XXX - separate compiler/libc wrappers
 # XXX - separate by directory
 # XXX - use alternatives (glibc/musl-static/uclibc-ng-static in decreasion prio)
+# XXX - symlink applets in install section so manifest/filelist is right
 
 %define	spname		busybox
 %define	instdir		/opt/%{spname}
