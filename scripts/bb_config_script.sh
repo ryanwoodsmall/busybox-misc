@@ -5,8 +5,8 @@
 #
 #   busybox : 1.26.2 (stable)
 #   rhel : 6, 7 with default glibc
-#   musl : 1.1.16 (rhel6, static, without ipv6)
-#   uclibc-ng : 1.0.23/24 (rhel6, static, rpc, config(s) linked below)
+#   musl : 1.1.16 (rhel6, static)
+#   uclibc-ng : 1.0.23/24 (rhel6, static, config(s) linked below)
 #
 
 #
@@ -168,6 +168,7 @@ toggle_on CONFIG_VERBOSE_RESOLUTION_ERRORS
 
 # network extras
 toggle_on CONFIG_FEATURE_IP_RARE_PROTOCOLS
+toggle_on CONFIG_FEATURE_PREFER_IPV4_ADDRESS
 toggle_on CONFIG_FEATURE_TRACEROUTE_SOURCE_ROUTE
 toggle_on CONFIG_FEATURE_TRACEROUTE_USE_ICMP
 
@@ -250,18 +251,13 @@ if [ "${musl}" -eq 1 ] ; then
 	toggle_off CONFIG_SELINUXENABLED
 	toggle_off CONFIG_WERROR
 	# XXX - redundant?
-	toggle_on CONFIG_FEATURE_IFUPDOWN_IPV6
-	toggle_on CONFIG_FEATURE_IPV6
 	toggle_on CONFIG_FEATURE_LAST_FANCY
-	toggle_on CONFIG_FEATURE_PREFER_IPV4_ADDRESS
 	toggle_on CONFIG_FEATURE_UPTIME_UTMP_SUPPORT
 	toggle_on CONFIG_FEATURE_UTMP
 	toggle_on CONFIG_FEATURE_WTMP
 	toggle_on CONFIG_LAST
 	toggle_on CONFIG_MONOTONIC_SYSCALL
-	toggle_on CONFIG_PING6
 	toggle_on CONFIG_RUNLEVEL
-	toggle_on CONFIG_TRACEROUTE6
 	toggle_on CONFIG_USERS
 	toggle_on CONFIG_WALL
 	toggle_on CONFIG_WHO

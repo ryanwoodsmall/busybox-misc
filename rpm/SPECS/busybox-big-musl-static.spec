@@ -11,7 +11,7 @@
 
 Name:		%{spname}-big-musl-static
 Version:	1.26.2
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -75,6 +75,9 @@ exit 0
 
 
 %changelog
+* Fri May  5 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.26.2-3
+- enable ipv6 on musl-libc
+
 * Mon Mar 27 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.26.2-2
 - use posttrans instead of post to work around upgrade uninstall
 
