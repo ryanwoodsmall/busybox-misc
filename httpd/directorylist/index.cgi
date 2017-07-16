@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env ash
+
+#set -x
 
 echo "Content-type: text/html"
 echo ""
@@ -8,6 +10,8 @@ cat <<HEADER
   <body style="font-family: monospace;">
 HEADER
 
+REQUEST_URI="${REQUEST_URI//&*/}"
+REQUEST_URI="${REQUEST_URI//\?*/}"
 HTTPDTOPDIR=`dirname ${PWD}`
 FULLPATH="${HTTPDTOPDIR}${REQUEST_URI}"
 FULLHOSTURL="http://${HTTP_HOST}"
@@ -33,3 +37,5 @@ cat <<FOOTER
   </body>
 </html>
 FOOTER
+
+# vim: set filetype=sh:
