@@ -3,10 +3,10 @@
 #
 # versions tested
 #
-#   busybox : 1.26.2 (stable)
+#   busybox : 1.27.1 (stable)
 #   rhel : 6, 7 with default glibc
 #   musl : 1.1.16 (rhel6, static)
-#   uclibc-ng : 1.0.23/24 (rhel6, static, config(s) linked below)
+#   uclibc-ng : 1.0.25 (rhel6, static, config(s) linked below)
 #
 
 #
@@ -14,6 +14,9 @@
 #
 #  uclibc-ng configs:
 #    https://github.com/ryanwoodsmall/uclibc-misc/tree/master/conf
+#
+#  musl static libc RPM build scripts:
+#    https://github.com/ryanwoodsmall/musl-misc
 #
 
 # TODO
@@ -208,6 +211,10 @@ toggle_off CONFIG_FEATURE_FTPD_AUTHENTICATION
 # enable gzip compression levels
 toggle_on CONFIG_FEATURE_GZIP_LEVELS
 
+# more compression stuff
+toggle_on CONFIG_UNLZOP
+toggle_on CONFIG_LZOPCAT
+
 # disable fancy sync
 toggle_off CONFIG_FEATURE_SYNC_FANCY
 
@@ -232,6 +239,7 @@ toggle_on CONFIG_FEATURE_SH_IS_ASH
 toggle_off CONFIG_MODPROBE_SMALL
 toggle_on CONFIG_FEATURE_LSMOD_PRETTY_2_6_OUTPUT
 toggle_on CONFIG_FEATURE_MODPROBE_BLACKLIST
+toggle_on CONFIG_FEATURE_MODUTILS_ALIAS
 # XXX - ugly fix for uclibc-ng 1.0.21+
 grep -q '^#ifdef __UCLIBC__$' modutils/modutils.c && \
 	sed -i.ORIG '/__UCLIBC__/ s/__UCLIBC__/__UCLIBCOLD__/g' modutils/modutils.c

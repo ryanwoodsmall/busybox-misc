@@ -10,8 +10,8 @@
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-big-musl-static
-Version:	1.26.2
-Release:	3%{?dist}
+Version:	1.27.1
+Release:	0%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -75,6 +75,9 @@ exit 0
 
 
 %changelog
+* Tue Jul 18 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.1-0
+- busybox 1.27.1 stable release
+
 * Fri May  5 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.26.2-3
 - enable ipv6 on musl-libc
 
