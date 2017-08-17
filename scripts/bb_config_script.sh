@@ -4,9 +4,11 @@
 # versions tested
 #
 #   busybox : 1.27.1 (stable)
-#   rhel : 6, 7 with default glibc
-#   musl : 1.1.16 (rhel6, static)
-#   uclibc-ng : 1.0.25 (rhel6, static, config(s) linked below)
+#   rhel, centos : 6, 7 (default glibc, musl, uclibc-ng)
+#   debian, raspbian : 8 (default glibc, musl)
+#   ubuntu : 14.04, 16.04 LTS (default glibc, musl)
+#   musl : 1.1.16 (rhel6/7, static)
+#   uclibc-ng : 1.0.26 (rhel6/7, static, config(s) linked below)
 #
 
 #
@@ -26,6 +28,11 @@
 #   selinux (ugh)
 #   systemd (double ugh)
 #   unicode
+#   installer symlinks/hardlinks
+#     CONFIG_INSTALL_APPLET_SYMLINKS
+#     CONFIG_INSTALL_APPLET_HARDLINKS
+#     CONFIG_INSTALL_SH_APPLET_SYMLINK
+#     CONFIG_INSTALL_SH_APPLET_HARDLINK
 #
 
 # who are we
