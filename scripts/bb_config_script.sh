@@ -3,7 +3,7 @@
 #
 # versions tested
 #
-#   busybox : 1.27.1 (stable)
+#   busybox : 1.27.2 (stable)
 #   rhel, centos : 6, 7 (default glibc, musl, uclibc-ng)
 #   debian, raspbian : 8 (default glibc, musl)
 #   ubuntu : 14.04, 16.04 LTS (default glibc, musl)
@@ -250,6 +250,9 @@ toggle_on CONFIG_FEATURE_MODUTILS_ALIAS
 # XXX - ugly fix for uclibc-ng 1.0.21+
 grep -q '^#ifdef __UCLIBC__$' modutils/modutils.c && \
 	sed -i.ORIG '/__UCLIBC__/ s/__UCLIBC__/__UCLIBCOLD__/g' modutils/modutils.c
+
+# enable fedora compat (uname, ...)
+toggle_on CONFIG_FEDORA_COMPAT
 
 # XXX - need to figure out monotonic syscall for all 3 standard c libraries and 2 rhel versions
 
