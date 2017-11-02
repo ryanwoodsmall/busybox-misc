@@ -67,7 +67,7 @@ function toggle_on() {
 # options/usage
 function usage() {
 	cat <<-EOF
-	${scriptname} [-6] [-7] [-i] [-m] [-p] [-s] [-m]
+	${scriptname} [-6] [-7] [-i] [-m] [-p] [-s] [-u]
 	  -6 : rhel/centos 6 specific options
 	  -7 : rhel/centos 7 specific options
 	  -i : include "busybox --install" support
