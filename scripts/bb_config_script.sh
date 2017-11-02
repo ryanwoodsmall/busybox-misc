@@ -23,6 +23,7 @@
 
 # TODO
 #
+#   this should not require "real" bash
 #   debug option(s)
 #   locale (uclibc/glibc only, no musl?)
 #   selinux (ugh)
