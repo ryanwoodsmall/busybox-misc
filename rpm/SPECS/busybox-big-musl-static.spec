@@ -11,7 +11,7 @@
 
 Name:		%{spname}-big-musl-static
 Version:	1.27.2
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -75,6 +75,9 @@ exit 0
 
 
 %changelog
+* Thu Dec 21 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-3
+- new wget tls, statusbar, etc. options
+
 * Wed Nov  1 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-2
 - musl version bump
 

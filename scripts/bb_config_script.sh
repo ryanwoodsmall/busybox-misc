@@ -255,6 +255,14 @@ grep -q '^#ifdef __UCLIBC__$' modutils/modutils.c && \
 # enable fedora compat (uname, ...)
 toggle_on CONFIG_FEDORA_COMPAT
 
+# build a big/secure wget
+toggle_on FEATURE_WGET_LONG_OPTIONS
+toggle_on FEATURE_WGET_STATUSBAR
+toggle_on FEATURE_WGET_AUTHENTICATION
+toggle_on FEATURE_WGET_TIMEOUT
+toggle_on FEATURE_WGET_HTTPS
+toggle_on FEATURE_WGET_OPENSSL
+
 # XXX - need to figure out monotonic syscall for all 3 standard c libraries and 2 rhel versions
 
 # musl override options
