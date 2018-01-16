@@ -3,12 +3,12 @@
 #
 # versions tested
 #
-#   busybox : 1.27.2 (stable)
+#   busybox : 1.28.0 (stable)
 #   rhel, centos : 6, 7 (default glibc, musl, uclibc-ng)
 #   debian, raspbian : 8 (default glibc, musl)
 #   ubuntu : 14.04, 16.04 LTS (default glibc, musl)
 #   musl : 1.1.18 (rhel6/7, static)
-#   uclibc-ng : 1.0.26 (rhel6/7, static, config(s) linked below)
+#   uclibc-ng : 1.0.27 (rhel6/7, static, config(s) linked below)
 #
 
 #
@@ -121,8 +121,10 @@ make defconfig
 
 # make a static binary (default)
 toggle_on CONFIG_STATIC
+#toggle_on CONFIG_FEATURE_LIBBUSYBOX_STATIC
 
 # rhel/centos 6 and 7 specific settings
+# XXX - selinux enablement for non musl/uclibc(-ng)
 if [ "${rhel7}" -eq 1 ] ; then
 	toggle_off CONFIG_STATIC
 	toggle_on CONFIG_PAM
@@ -136,12 +138,12 @@ elif [ "${rhel6}" -eq 1 ] ; then
 	# XXX - setns is not in glibc on rhel 6
 	# https://sourceforge.net/p/ltp/mailman/message/34252897/
 	toggle_off CONFIG_NSENTER
-	toggle_off CONFIG_FEATURE_NSENTER_LONG_OPTS
 fi
 
 # check for force static here since we may reset on rhel-specific above
 if [ "${static}" -eq 1 ] ; then
 	toggle_on CONFIG_STATIC
+	#toggle_on CONFIG_FEATURE_LIBBUSYBOX_STATIC
 fi
 
 # uclibc/musl overrides are below
@@ -206,8 +208,9 @@ toggle_on CONFIG_TUNE2FS
 toggle_on CONFIG_UNCOMPRESS
 toggle_on CONFIG_FEATURE_SEAMLESS_Z
 
-# enable extra nc program options
+# enable extra nc program options, netcat alias
 toggle_on CONFIG_NC_110_COMPAT
+toggle_on CONFIG_NETCAT
 
 # enable BLKID_TYPE and squashfs volume ID
 toggle_on CONFIG_FEATURE_BLKID_TYPE
@@ -237,6 +240,10 @@ toggle_on CONFIG_FEATURE_LZMA_FAST
 toggle_off CONFIG_BASH_IS_HUSH
 toggle_off CONFIG_BASH_IS_NONE
 toggle_on CONFIG_BASH_IS_ASH
+
+# ps stuff
+toggle_on CONFIG_MINIPS
+toggle_on CONFIG_FEATURE_PS_LONG
 
 # sh is also ash
 toggle_off CONFIG_FEATURE_SH_IS_HUSH
@@ -299,8 +306,6 @@ fi
 # common musl/uclibc-ng options (nsenter, etc.)
 if [ "${musl}" -eq 1 -o "${uclibc}" -eq 1 ] ; then
 	toggle_on CONFIG_NSENTER
-	toggle_on CONFIG_FEATURE_NSENTER_LONG_OPTS
-	toggle_off CONFIG_FEATURE_HAVE_RPC
 	toggle_off CONFIG_FEATURE_INETD_RPC
 	toggle_off CONFIG_PAM
 fi

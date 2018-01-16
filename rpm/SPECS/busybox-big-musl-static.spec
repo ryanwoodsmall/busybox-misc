@@ -10,7 +10,7 @@
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-big-musl-static
-Version:	1.27.2
+Version:	1.28.0
 Release:	4%{?dist}
 Summary:	busybox compiled with musl-static
 
@@ -75,6 +75,9 @@ exit 0
 
 
 %changelog
+* Tue Jan 16 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-4
+- busybox 1.28.0
+
 * Fri Dec 22 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-4
 - have to prepend CONFIG_ to toggle_on for actual feature additions
 
