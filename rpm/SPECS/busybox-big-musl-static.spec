@@ -11,7 +11,7 @@
 
 Name:		%{spname}-big-musl-static
 Version:	1.28.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -53,6 +53,8 @@ mkdir -p %{buildroot}%{instdir}
 install -p -m 0755 busybox %{buildroot}%{instdir}/%{name}
 ln -sf %{name} %{buildroot}%{instdir}/%{spname}
 ln -sf %{name} %{buildroot}%{instdir}/%{spname}-big
+mkdir -p %{buildroot}/sbin
+ln -s %{instdir}/%{spname} %{buildroot}/sbin/
 mkdir -p %{buildroot}%{profiled}
 echo 'export PATH="${PATH}:%{instdir}"' > %{buildroot}%{profiled}/%{name}.sh
 
@@ -72,9 +74,13 @@ exit 0
 %files
 %{instdir}/%{spname}*
 %{profiled}/%{name}.sh
+/sbin/%{spname}
 
 
 %changelog
+* Mon Jan 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-5
+- include /sbin/busybox symlink
+
 * Tue Jan 16 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-4
 - busybox 1.28.0
 
