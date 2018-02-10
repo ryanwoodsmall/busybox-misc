@@ -9,9 +9,9 @@
 %define	instdir		/opt/%{spname}
 %define	profiled	%{_sysconfdir}/profile.d
 
-Name:		%{spname}-big-musl-static
+Name:		%{spname}-musl-static
 Version:	1.28.0
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -28,10 +28,12 @@ BuildRequires:	gcc
 BuildRequires:	make
 BuildRequires:	kernel-headers
 
-Obsoletes:	busybox
+Obsoletes:	%{spname}
+Obsoletes:	%{spname}-big-musl-static
 
 Provides:	%{spname}
 Provides:	%{spname}-big
+Provides:	%{spname}-big-musl-static
 Provides:	%{name}
 
 %description
@@ -78,6 +80,9 @@ exit 0
 
 
 %changelog
+* Mon Jan 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-6
+- busybox-big-musl-static -> busybox-musl-static rename
+
 * Mon Jan 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-5
 - include /sbin/busybox symlink
 
