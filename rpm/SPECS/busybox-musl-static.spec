@@ -10,7 +10,7 @@
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-musl-static
-Version:	1.28.0
+Version:	1.28.1
 Release:	6%{?dist}
 Summary:	busybox compiled with musl-static
 
@@ -80,7 +80,10 @@ exit 0
 
 
 %changelog
-* Mon Jan 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-6
+* Thu Feb 15 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.1-6
+- busybox 1.28.1
+
+* Fri Feb 09 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-6
 - busybox-big-musl-static -> busybox-musl-static rename
 
 * Mon Jan 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-5
