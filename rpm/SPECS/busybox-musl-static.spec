@@ -10,7 +10,7 @@
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-musl-static
-Version:	1.28.1
+Version:	1.28.2
 Release:	7%{?dist}
 Summary:	busybox compiled with musl-static
 
@@ -80,6 +80,9 @@ exit 0
 
 
 %changelog
+* Wed Mar 28 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.2-7
+- busybox 1.28.2
+
 * Thu Feb 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.1-7
 - bump release for musl-libc 1.1.19
 
