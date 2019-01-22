@@ -11,7 +11,7 @@
 
 Name:		%{spname}-musl-static
 Version:	1.29.3
-Release:	0%{?dist}
+Release:	9%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
