@@ -3,12 +3,8 @@
 #
 # versions tested
 #
-#   busybox : 1.29.3 (stable)
-#   rhel, centos : 6, 7 (default glibc, musl, uclibc-ng)
-#   debian, raspbian : 8, 9 (default glibc, musl)
-#   ubuntu : 14.04, 16.04 LTS (default glibc, musl)
-#   musl : 1.1.19 (rhel6/7, static)
-#   uclibc-ng : 1.0.28 (rhel6/7, static, config(s) linked below)
+#   busybox : 1.30.1 (stable)
+#   musl : 1.1.21 (static)
 #
 
 #
