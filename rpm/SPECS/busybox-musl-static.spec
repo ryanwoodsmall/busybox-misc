@@ -11,7 +11,7 @@
 
 Name:		%{spname}-musl-static
 Version:	1.30.1
-Release:	10%{?dist}
+Release:	11%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -23,7 +23,7 @@ Source1:	https://raw.githubusercontent.com/ryanwoodsmall/busybox-misc/master/scr
 # if you need musl-static:
 # https://github.com/ryanwoodsmall/musl-misc/blob/master/rpm/SPECS/musl-static.spec
 
-BuildRequires:	musl-static >= 1.1.22-0
+BuildRequires:	musl-static >= 1.1.23-0
 BuildRequires:	gcc
 BuildRequires:	make
 BuildRequires:	kernel-headers
@@ -80,6 +80,9 @@ exit 0
 
 
 %changelog
+* Wed Jul 17 2019 ryan woodsmall <rwoodsmall@gmail.com> - 1.30.1-11
+- release bump for musl 1.1.23
+
 * Thu Apr 11 2019 ryan woodsmall <rwoodsmall@gmail.com> - 1.30.1-10
 - release bump for musl 1.1.22
 
