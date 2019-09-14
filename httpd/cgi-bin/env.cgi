@@ -8,7 +8,7 @@ cat <<HEADER
   <body>
 HEADER
 
-echo "Sample CGI Output"
+echo "CGI Environment"
 echo "<br />"
 echo "<br />"
 
