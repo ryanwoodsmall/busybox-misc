@@ -246,7 +246,7 @@ toggle_off CONFIG_FEATURE_SH_IS_HUSH
 toggle_off CONFIG_FEATURE_SH_IS_NONE
 toggle_on CONFIG_FEATURE_SH_IS_ASH
 
-# kernel module 
+# kernel module
 toggle_off CONFIG_MODPROBE_SMALL
 toggle_on CONFIG_FEATURE_LSMOD_PRETTY_2_6_OUTPUT
 toggle_on CONFIG_FEATURE_MODPROBE_BLACKLIST
@@ -265,6 +265,19 @@ toggle_on CONFIG_FEATURE_WGET_AUTHENTICATION
 toggle_on CONFIG_FEATURE_WGET_TIMEOUT
 toggle_on CONFIG_FEATURE_WGET_HTTPS
 toggle_on CONFIG_FEATURE_WGET_OPENSSL
+
+# busybox 1.34.x
+toggle_off CONFIG_FEATURE_TOUCH_NODEREF
+toggle_off CONFIG_FEATURE_WATCHDOG_OPEN_TWICE
+toggle_on CONFIG_CRC32
+toggle_on CONFIG_FEATURE_CUT_REGEX
+toggle_on CONFIG_FEATURE_VI_COLON_EXPAND
+toggle_on CONFIG_FEATURE_VI_VERBOSE_STATUS
+toggle_on CONFIG_ASCII
+toggle_on CONFIG_FEATURE_WGET_FTP
+toggle_on CONFIG_HUSH_LINENO_VAR
+toggle_on CONFIG_HUSH_LINENO_VAR
+echo 'CONFIG_UDHCPC_DEFAULT_INTERFACE="eth0"' >> .config
 
 # XXX - need to figure out monotonic syscall for all 3 standard c libraries and 2 rhel versions
 
