@@ -10,7 +10,7 @@
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-musl-static
-Version:	1.34.1
+Version:	1.35.0
 Release:	15%{?dist}
 Summary:	busybox compiled with musl-static
 
@@ -80,6 +80,9 @@ exit 0
 
 
 %changelog
+* Wed Jan  5 2022 ryan woodsmall <rwoodsmall@gmail.com>
+- busybox 1.35.0
+
 * Thu Sep 30 2021 ryan woodsmall <rwoodsmall@gmail.com>
 - busybox 1.34.1
 
