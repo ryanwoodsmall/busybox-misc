@@ -47,11 +47,13 @@ BusyBox: The Swiss Army Knife of Embedded Linux
 
 
 %build
+. /etc/profile
 bash %{SOURCE1} -$(rpm --eval '%{rhel}') -m -s
 make %{?_smp_mflags} V=1 HOSTCC=musl-gcc CC=musl-gcc
 
 
 %install
+. /etc/profile
 #make install DESTDIR=%{buildroot}
 mkdir -p %{buildroot}%{instdir}
 install -p -m 0755 busybox %{buildroot}%{instdir}/%{name}
@@ -84,6 +86,7 @@ exit 0
 %changelog
 * Fri Aug 19 2022 ryan woodsmall <rwoodsmall@gmail.com>
 - turn off debug
+- source profile for musl-static
 
 * Fri Apr 29 2022 ryan woodsmall <rwoodsmall@gmail.com>
 - release bump for musl 1.2.3
