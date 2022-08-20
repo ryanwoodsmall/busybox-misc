@@ -5,13 +5,15 @@
 # XXX - use alternatives (glibc/musl-static/uclibc-ng-static in decreasion prio)
 # XXX - symlink applets in install section so manifest/filelist is right
 
+%global	debug_package	%{nil}
+
 %define	spname		busybox
 %define	instdir		/opt/%{spname}
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-musl-static
 Version:	1.35.0
-Release:	16%{?dist}
+Release:	17%{?dist}
 Summary:	busybox compiled with musl-static
 
 Group:		System Environment/Shells
@@ -80,6 +82,9 @@ exit 0
 
 
 %changelog
+* Fri Aug 19 2022 ryan woodsmall <rwoodsmall@gmail.com>
+- turn off debug
+
 * Fri Apr 29 2022 ryan woodsmall <rwoodsmall@gmail.com>
 - release bump for musl 1.2.3
 

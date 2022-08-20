@@ -41,6 +41,8 @@ installer=0
 usrpath=0
 rhel6=0
 rhel7=0
+rhel8=0
+rhel9=0
 static=0
 uclibc=0
 
@@ -63,9 +65,11 @@ function toggle_on() {
 # options/usage
 function usage() {
 	cat <<-EOF
-	${scriptname} [-6] [-7] [-i] [-m] [-p] [-s] [-u]
-	  -6 : rhel/centos 6 specific options
-	  -7 : rhel/centos 7 specific options
+	${scriptname} [-6] [-7] [-8] [-9] [-i] [-m] [-p] [-s] [-u]
+	  -6 : rhel 6 specific options
+	  -7 : rhel 7 specific options
+	  -8 : rhel 8 specific options
+	  -9 : rhel 9 specific options
 	  -i : include "busybox --install" support
 	  -m : musl specific options
 	  -p : use /usr for "busybox --install"
@@ -76,13 +80,19 @@ function usage() {
 }
 
 # read options
-while getopts ":67impsu" opt ; do
+while getopts ":6789impsu" opt ; do
 	case ${opt} in
 		6)
 			rhel6=1
 			;;
 		7)
 			rhel7=1
+			;;
+		8)
+			rhel8=1
+			;;
+		9)
+			rhel9=1
 			;;
 		i)
 			installer=1
