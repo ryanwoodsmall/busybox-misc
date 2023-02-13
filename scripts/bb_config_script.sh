@@ -144,6 +144,9 @@ elif [ "${rhel6}" -eq 1 ] ; then
 	# XXX - setns is not in glibc on rhel 6
 	# https://sourceforge.net/p/ltp/mailman/message/34252897/
 	toggle_off CONFIG_NSENTER
+	# now hardware accel on old compilers
+	toggle_off CONFIG_SHA1_HWACCEL
+	toggle_off CONFIG_SHA256_HWACCEL
 fi
 
 # check for force static here since we may reset on rhel-specific above
