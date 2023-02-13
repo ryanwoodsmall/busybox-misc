@@ -31,7 +31,8 @@
 #     CONFIG_INSTALL_SH_APPLET_SYMLINK
 #     CONFIG_INSTALL_SH_APPLET_HARDLINK
 #
-# XXX - probably turn off HWACCEL settings by default - disabled on rhel6 for now
+# XXX - revisit turning off HWACCEL settings by default?
+# XXX - need to figure out monotonic syscall for all 3 standard c libraries and 2 rhel versions
 #
 
 # who are we
@@ -146,9 +147,6 @@ elif [ "${rhel6}" -eq 1 ] ; then
 	# XXX - setns is not in glibc on rhel 6
 	# https://sourceforge.net/p/ltp/mailman/message/34252897/
 	toggle_off CONFIG_NSENTER
-	# now hardware accel on old compilers
-	toggle_off CONFIG_SHA1_HWACCEL
-	toggle_off CONFIG_SHA256_HWACCEL
 fi
 
 # check for force static here since we may reset on rhel-specific above
@@ -294,7 +292,10 @@ toggle_on CONFIG_HUSH_LINENO_VAR
 toggle_on CONFIG_HUSH_LINENO_VAR
 echo 'CONFIG_UDHCPC_DEFAULT_INTERFACE="eth0"' >> .config
 
-# XXX - need to figure out monotonic syscall for all 3 standard c libraries and 2 rhel versions
+# 1.36.x
+# disable hardware acceleration for now...
+toggle_off CONFIG_SHA1_HWACCEL
+toggle_off CONFIG_SHA256_HWACCEL
 
 # musl override options
 if [ "${musl}" -eq 1 ] ; then
