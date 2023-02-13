@@ -12,7 +12,7 @@
 %define	profiled	%{_sysconfdir}/profile.d
 
 Name:		%{spname}-musl-static
-Version:	1.35.0
+Version:	1.36.0
 Release:	17%{?dist}
 Summary:	busybox compiled with musl-static
 
@@ -84,112 +84,115 @@ exit 0
 
 
 %changelog
-* Fri Aug 19 2022 ryan woodsmall <rwoodsmall@gmail.com>
+* Sun Feb 12 2023 ryan woodsmall
+- busybox 1.36.0
+
+* Fri Aug 19 2022 ryan woodsmall
 - turn off debug
 - source profile for musl-static
 
-* Fri Apr 29 2022 ryan woodsmall <rwoodsmall@gmail.com>
+* Fri Apr 29 2022 ryan woodsmall
 - release bump for musl 1.2.3
 
-* Wed Jan  5 2022 ryan woodsmall <rwoodsmall@gmail.com>
+* Wed Jan  5 2022 ryan woodsmall
 - busybox 1.35.0
 
-* Thu Sep 30 2021 ryan woodsmall <rwoodsmall@gmail.com>
+* Thu Sep 30 2021 ryan woodsmall
 - busybox 1.34.1
 
-* Mon May  3 2021 ryan woodsmall <rwoodsmall@gmail.com>
+* Mon May  3 2021 ryan woodsmall
 - busybox 1.33.1
 
-* Fri Jan 15 2021 ryan woodsmall <rwoodsmall@gmail.com>
+* Fri Jan 15 2021 ryan woodsmall
 - release bump for musl 1.2.2
 
-* Wed Dec 30 2020 ryan woodsmall <rwoodsmall@gmail.com>
+* Wed Dec 30 2020 ryan woodsmall
 - release bump for musl CVE-2020-28928
 
-* Tue Dec 29 2020 ryan woodsmall <rwoodsmall@gmail.com>
+* Tue Dec 29 2020 ryan woodsmall
 - busybox 1.33.0
 
-* Sun Nov  1 2020 ryan woodsmall <rwoodsmall@gmail.com>
+* Sun Nov  1 2020 ryan woodsmall
 - busybox 1.32.0
 
-* Tue Oct 20 2020 ryan woodsmall <rwoodsmall@gmail.com>
+* Tue Oct 20 2020 ryan woodsmall
 - release bump for musl 1.2.1
 
-* Thu Oct 31 2019 ryan woodsmall <rwoodsmall@gmail.com>
+* Thu Oct 31 2019 ryan woodsmall
 - busybox 1.31.1
 
-* Sat Oct 26 2019 ryan woodsmall <rwoodsmall@gmail.com>
+* Sat Oct 26 2019 ryan woodsmall
 - release bump for musl 1.1.24
 
-* Wed Jul 17 2019 ryan woodsmall <rwoodsmall@gmail.com> - 1.30.1-11
+* Wed Jul 17 2019 ryan woodsmall - 1.30.1-11
 - release bump for musl 1.1.23
 
-* Thu Apr 11 2019 ryan woodsmall <rwoodsmall@gmail.com> - 1.30.1-10
+* Thu Apr 11 2019 ryan woodsmall - 1.30.1-10
 - release bump for musl 1.1.22
 
-* Fri Feb 15 2019 ryan woodsmall <rwoodsmall@gmail.com> - 1.30.1-9
+* Fri Feb 15 2019 ryan woodsmall - 1.30.1-9
 - busybox 1.30.1
 
-* Tue Jan 22 2019 ryan woodsmall <rwoodsmall@gmail.com> - 1.29.3-9
+* Tue Jan 22 2019 ryan woodsmall - 1.29.3-9
 - release bump for musl 1.1.21
 
-* Tue Sep 11 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.29.3-8
+* Tue Sep 11 2018 ryan woodsmall - 1.29.3-8
 - busybox 1.29.3
 - release bump for musl 1.1.20
 
-* Tue Jul 31 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.29.2-7
+* Tue Jul 31 2018 ryan woodsmall - 1.29.2-7
 - busybox 1.29.2
 
-* Sun Jul 15 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.29.1-7
+* Sun Jul 15 2018 ryan woodsmall - 1.29.1-7
 - busybox 1.29.1
 
-* Wed May 23 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.3-7
+* Wed May 23 2018 ryan woodsmall - 1.28.3-7
 - busybox 1.28.4
 
-* Wed Mar 28 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.3-7
+* Wed Mar 28 2018 ryan woodsmall - 1.28.3-7
 - busybox 1.28.3
 
-* Wed Mar 28 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.2-7
+* Wed Mar 28 2018 ryan woodsmall - 1.28.2-7
 - busybox 1.28.2
 
-* Thu Feb 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.1-7
+* Thu Feb 22 2018 ryan woodsmall - 1.28.1-7
 - bump release for musl-libc 1.1.19
 
-* Thu Feb 15 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.1-6
+* Thu Feb 15 2018 ryan woodsmall - 1.28.1-6
 - busybox 1.28.1
 
-* Fri Feb 09 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-6
+* Fri Feb 09 2018 ryan woodsmall - 1.28.0-6
 - busybox-big-musl-static -> busybox-musl-static rename
 
-* Mon Jan 22 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-5
+* Mon Jan 22 2018 ryan woodsmall - 1.28.0-5
 - include /sbin/busybox symlink
 
-* Tue Jan 16 2018 ryan woodsmall <rwoodsmall@gmail.com> - 1.28.0-4
+* Tue Jan 16 2018 ryan woodsmall - 1.28.0-4
 - busybox 1.28.0
 
-* Fri Dec 22 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-4
+* Fri Dec 22 2017 ryan woodsmall - 1.27.2-4
 - have to prepend CONFIG_ to toggle_on for actual feature additions
 
-* Thu Dec 21 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-3
+* Thu Dec 21 2017 ryan woodsmall - 1.27.2-3
 - new wget tls, statusbar, etc. options
 
-* Wed Nov  1 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-2
+* Wed Nov  1 2017 ryan woodsmall - 1.27.2-2
 - musl version bump
 
-* Fri Oct 20 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-1
+* Fri Oct 20 2017 ryan woodsmall - 1.27.2-1
 - require minimum version of musl since we're using it statically
 
-* Sat Aug 19 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.2-0
+* Sat Aug 19 2017 ryan woodsmall - 1.27.2-0
 - busybox 1.27.2 stable release
 
-* Tue Jul 18 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.27.1-0
+* Tue Jul 18 2017 ryan woodsmall - 1.27.1-0
 - busybox 1.27.1 stable release
 
-* Fri May  5 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.26.2-3
+* Fri May  5 2017 ryan woodsmall - 1.26.2-3
 - enable ipv6 on musl-libc
 
-* Mon Mar 27 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.26.2-2
+* Mon Mar 27 2017 ryan woodsmall - 1.26.2-2
 - use posttrans instead of post to work around upgrade uninstall
 
-* Mon Mar 27 2017 ryan woodsmall <rwoodsmall@gmail.com> - 1.26.2-1
+* Mon Mar 27 2017 ryan woodsmall - 1.26.2-1
 - initial rpm spec file for musl-static compiled busybox
