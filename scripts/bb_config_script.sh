@@ -31,6 +31,8 @@
 #     CONFIG_INSTALL_SH_APPLET_SYMLINK
 #     CONFIG_INSTALL_SH_APPLET_HARDLINK
 #
+# XXX - probably turn off HWACCEL settings by default - disabled on rhel6 for now
+#
 
 # who are we
 scriptname="$(basename "${BASH_SOURCE[0]}")"
